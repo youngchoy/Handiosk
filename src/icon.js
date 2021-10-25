@@ -1,6 +1,6 @@
 import './icon.css';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 // 결과
 /*
@@ -21,29 +21,27 @@ import { useState } from 'react';
 */
 
 function Icon({name, img, socket}) {
-	const [one, setOne] = useState(0);
+	// const [one, setOne] = useState(0);
 
 
 
-	socket.addEventListener("message", (message) => {
-		if (message.data == "1"){
-			setOne(one + 1);
-			console.log("1이 인식됨. 누적수:", one);
-		}
-		//console.log("New message: ", message.data);
-	});
+	// socket.addEventListener("message", (message) => {
+	// 	if (message.data == "1"){
+	// 		setOne(one + 1);
+	// 		console.log("1이 인식됨. 누적수:", one);
+	// 	}
+	// 	//console.log("New message: ", message.data);
+	// });
 
 	return (
 	  <div className="icon">
 		<img className="icon_img" src={img} alt="icon" />
 		<br />
-		<button onClick={ () => {setOne(one + 1)}} >plus</button>
 
-		<h2>{one}</h2>
+		<h2>Nothing</h2>
 	  </div>
 	);
 }
-
 
 
 Icon.propTypes = {

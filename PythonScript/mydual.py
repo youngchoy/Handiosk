@@ -1,14 +1,13 @@
 import cv2
 import numpy as np
-import socket
-import websocket
 from cvzone.HandTrackingModule import HandDetector
-from PIL import ImageFont, Image, ImageDraw
+# from PIL import ImageFont, Image, ImageDraw
 from time import sleep
 #===================================================
 
 import asyncio
 import websockets
+import json
 
 # font 문제 해결
 # font = ImageFont.truetype("fonts/gulim.ttc", 20)
@@ -34,8 +33,12 @@ async def accept(websocket, path):
     timer = 0
     action = "non"
     action_delay = 0
+    
+    dummy_data = '{"action": "non", "percentage": 0}'
+    packet = json.loads(dummy_data)
 
     while True:
+
         # 두개의 이미지를 두개의 창에서 열어서 보여주는 것은 왜인지 맥에서는 되지 않는다. 일단 캠을 띄우긴 하자.
         _, hand_cam = cap_cam.read()
         hand_cam = cv2.flip(hand_cam, 1)
@@ -60,22 +63,28 @@ async def accept(websocket, path):
             if fingers == [1, 0, 0, 0, 0]:  # 엄지척
                 cv2.putText(hand_cam, "thumbs up", (int(h / 2), 700), cv2.FONT_ITALIC, 3, (255, 255, 255), 2,
                             cv2.LINE_AA)
-                await websocket.send("thumbs up")
+                packet["action"] = "thumbs up"
+                await websocket.send(json.dumps(packet))
             elif sum(fingers) == 1:  # 숫자 1
                 cv2.putText(hand_cam, "1", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
-                await websocket.send("1")
+                packet["action"] = "1"
+                await websocket.send(json.dumps(packet))
             elif sum(fingers) == 2:  # 숫자 2
                 cv2.putText(hand_cam, "2", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
-                await websocket.send("2")
+                packet["action"] = "2"
+                await websocket.send(json.dumps(packet))
             elif sum(fingers) == 3:  # 숫자 3
                 cv2.putText(hand_cam, "3", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
-                await websocket.send("3")
+                packet["action"] = "3"
+                await websocket.send(json.dumps(packet))
             elif sum(fingers) == 4:  # 숫자 4
                 cv2.putText(hand_cam, "4", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
-                await websocket.send("4")
+                packet["action"] = "4"
+                await websocket.send(json.dumps(packet))
             elif sum(fingers) == 5:  # 숫자 5
                 cv2.putText(hand_cam, "5", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
-                await websocket.send("5")
+                packet["action"] = "5"
+                await websocket.send(json.dumps(packet))
 
             # scroll
             length, info, hand_cam = detector.findDistance(lm_list[4], lm_list[8], hand_cam)  # 엄지와 검지 사이의 거리구하기
@@ -93,7 +102,8 @@ async def accept(websocket, path):
                         action = "non"
                         timer = 0
                         action_delay = 40  # 다음동작 시전할 때 까지의 액션딜레이
-                        await websocket.send("scroll right")
+                        packet["action"] = "scroll right"
+                        await websocket.send(json.dumps(packet))
                     elif (init_point[0] - info[4]) > 500:
                         cv2.putText(hand_cam, "scroll left", (int(h / 2), 500), cv2.FONT_ITALIC, 3, (255, 255, 255), 3,
                                     cv2.LINE_AA)
@@ -101,7 +111,26 @@ async def accept(websocket, path):
                         action = "non"
                         timer = 0
                         action_delay = 40  # 다음동작 시전할 때 까지의 액션딜레이
-                        await websocket.send("scroll left")
+                        packet["action"] = "scroll left"
+                        await websocket.send(json.dumps(packet))
+                    elif (init_point[1] - info[5]) < -200:
+                        cv2.putText(hand_cam, "scroll down", (int(h / 2), 500), cv2.FONT_ITALIC, 3, (255, 255, 255), 3,
+                                    cv2.LINE_AA)
+                        print("scroll down")
+                        action = "non"
+                        timer = 0
+                        action_delay = 40  # 다음동작 시전할 때 까지의 액션딜레이
+                        packet["action"] = "scroll down"
+                        await websocket.send(json.dumps(packet))
+                    elif (init_point[1] - info[5]) > 200:
+                        cv2.putText(hand_cam, "scroll up", (int(h / 2), 500), cv2.FONT_ITALIC, 3, (255, 255, 255), 3,
+                                    cv2.LINE_AA)
+                        print("scroll up")
+                        action = "non"
+                        timer = 0
+                        action_delay = 40  # 다음동작 시전할 때 까지의 액션딜레이
+                        packet["action"] = "scroll up"
+                        await websocket.send(json.dumps(packet))
                 elif action_delay == 0:  # scroll 액션을 시작 (액션딜레이에 걸리지 않았을 경우)
                     timer = 1
                     action = "scroll"
@@ -141,3 +170,9 @@ start_server = websockets.serve(accept, "127.0.0.1", 8000)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
+
+
+{
+    "action": "ssss"
+    
+}
