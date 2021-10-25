@@ -1,0 +1,29 @@
+.container {
+	background: pink;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.up {
+	width: 100%;
+	height: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background: brown;
+}
+
+.cart {
+	border: 1px solid black;
+	height: 30%;
+}
+
+.sidebar {
+	width: 10%;
+}
+
+.menupan {
+	width: 90%;
+	background: blue;
+}

@@ -9,6 +9,7 @@ import asyncio
 import websockets
 import json
 
+count = 0
 # font 문제 해결
 # font = ImageFont.truetype("fonts/gulim.ttc", 20)
 
@@ -38,7 +39,7 @@ async def accept(websocket, path):
     packet = json.loads(dummy_data)
 
     while True:
-
+        global count
         # 두개의 이미지를 두개의 창에서 열어서 보여주는 것은 왜인지 맥에서는 되지 않는다. 일단 캠을 띄우긴 하자.
         _, hand_cam = cap_cam.read()
         hand_cam = cv2.flip(hand_cam, 1)
@@ -69,6 +70,9 @@ async def accept(websocket, path):
                 cv2.putText(hand_cam, "1", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
                 packet["action"] = "1"
                 await websocket.send(json.dumps(packet))
+                count = count + 1
+                await websocket.send("one")
+                print("1을", count, "번 보냈습니다.")
             elif sum(fingers) == 2:  # 숫자 2
                 cv2.putText(hand_cam, "2", (int(h / 2), 700), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
                 packet["action"] = "2"
