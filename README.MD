@@ -10,12 +10,12 @@
 ### 준비
 - 해당 폴더에서 Npm install
 - 파이썬 3.7.9 가상환경 세팅(가능하다면 source venv/bin/activate 명령어로 venv 폴더에 있는 가상환경 사용)
-<b>가상환경 생성및 진입 Mac</b>
+<br/><b>가상환경 생성및 진입 Mac</b>
 - python3.7 -m venv venv2 로 python3.7기반 가상환경 생성
 - source venv2/bin/activate 명령어로 가상환경 진입
-<b>가상환경 생성및 진입 Windows</b>
+<br/><b>가상환경 생성및 진입 Windows</b>
 - anaconda를 이용하여 python3.7가상환경 생성 후 진입
-<b>파이썬 패키지 일괄설치</b>
+<br/><b>파이썬 패키지 일괄설치</b>
 - pip install -r requirements.txt 명령어로 패키지 한번에 설치가능
 - 만일 파이썬 수동설치시 호환성 문제로 인해 mediapipe 라이브러리는 0.8.8로 설치해야한다
 
