@@ -8,13 +8,7 @@ def finger_num_recog(fingers, packet, hand_cam, detector, lm_list):
     length2, _, hand_cam = detector.findDistance(lm_list[4], lm_list[16], hand_cam) # 엄지와 중지 사이의 거리
     length3, _, hand_cam = detector.findDistance(lm_list[4], lm_list[20], hand_cam) # 엄지와 약지 사이의 거리
 
-    if fingers == [1, 0, 0, 0, 0]:  # 엄지 업
-        # 엄지의 끝이 다른 손가락의 포인트보다 높거나 낮음을 통해 thumbs up, thumbs down을 판별
-        if lm_list[4][1] < lm_list[8][1]:
-            packet["action"] = "thumbs up"
-        else:
-            packet["action"] = "thumbs down"
-    elif sum(fingers) == 1:  # 숫자 1
+    if sum(fingers) == 1:  # 숫자 1
         if fingers == [1, 0, 0, 0, 0]:  # 엄지 업
             # 엄지의 끝이 다른 손가락의 포인트보다 높거나 낮음을 통해 thumbs up, thumbs down을 판별
             if lm_list[4][1] < lm_list[8][1]:
