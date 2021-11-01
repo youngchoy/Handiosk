@@ -80,7 +80,7 @@ async def accept(websocket, path):
 
         # packet이 non이 아닌 값을 가질때 이를 화면에 표시하고 packet을 전송한다.
         if packet["action"] != "non":
-            cv2.putText(hand_cam, packet["action"], (int(h / 2), 300), cv2.FONT_ITALIC, 5, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(hand_cam, packet["action"], (int(h / 2), 300), cv2.FONT_ITALIC, 1.5, (255, 255, 255), 2, cv2.LINE_AA)
             await websocket.send(json.dumps(packet))
 
         # scroll시 시작지점을 도넛모양으로 찍어줌

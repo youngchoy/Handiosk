@@ -7,15 +7,21 @@
 
 ## 사용법
 
+### 전체적인 실행방법
+- 3.7버전의 파이썬 가상환경 생성
+- 메인 폴더에서 npm install
+- 파이썬 가상환경에서 PythonScript 폴더 내의 main.py실행
+- 메인폴더에서 npm start로 리액트 앱 실행
+
 ### 준비
 - 해당 폴더에서 Npm install
 - 파이썬 3.7.9 가상환경 세팅(가능하다면 source venv/bin/activate 명령어로 venv 폴더에 있는 가상환경 사용)
-<br/><b>가상환경 생성및 진입 Mac</b>
+<br/><br/><b>가상환경 생성및 진입 Mac</b>
 - python3.7 -m venv venv2 로 python3.7기반 가상환경 생성
 - source venv2/bin/activate 명령어로 가상환경 진입
-<br/><b>가상환경 생성및 진입 Windows</b>
+<br/><br/><b>가상환경 생성및 진입 Windows</b>
 - anaconda를 이용하여 python3.7가상환경 생성 후 진입
-<br/><b>파이썬 패키지 일괄설치</b>
+<br/><br/><b>파이썬 패키지 일괄설치</b>
 - pip install -r requirements.txt 명령어로 패키지 한번에 설치가능
 - 만일 파이썬 수동설치시 호환성 문제로 인해 mediapipe 라이브러리는 0.8.8로 설치해야한다
 
@@ -26,7 +32,7 @@
 
 ## 현재까지 진행결과
 #### Python
-- 인식가능한 손 모양: 1, 2, 3, 4, 5, 엄지척, 상하좌우 스크롤
+- 인식가능한 손 모양: 1, 2, 3, 4, 5, 엄지 업, 엄지 다운, 상하좌우 스크롤
 - React앱으로 JSON파일 형식으로 socket통신
 #### React
 - 가장 복잡한 페이지의 layout제작완료
@@ -37,3 +43,4 @@
 
 ## Updates
 - 10.26(화) README 파일 첫 작성
+- 11.1(월) PythonScript의 mydual.py를 main.py와 hand_recog.py로 모듈화하고, 엄지를 올리는 것, 엄지를 내리는 것을 인식할 수 있도록 코드 추가
