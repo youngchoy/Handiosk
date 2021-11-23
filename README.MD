@@ -23,7 +23,7 @@
 - anaconda를 이용하여 python3.7가상환경 생성 후 진입
 <br/><br/><b>파이썬 패키지 일괄설치</b>
 - pip3 install -r requirements.txt 명령어로 패키지 한번에 설치가능
-- 만일 파이썬 수동설치시 호환성 문제로 인해 mediapipe 라이브러리는 0.8.8로 설치해야한다
+- 만일 파이썬 수동설치시 호환성 문제로 인해 mediapipe 라이브러리는 0.8.8로 설치해야한다(라즈베리파이의 경우 mediapipe-rpi4로 설치해야한다.)
 
 ### 실행
 - mydual.py를 실행시켜 백엔드(서버) 실행
